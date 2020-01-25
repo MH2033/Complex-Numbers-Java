@@ -18,11 +18,11 @@ public abstract class Complex {
     }
 
     public void printCartesian() {
-        System.out.printf("Z = %.2f + %.2fi\n", this.getX(), this.getY());
+        System.out.printf("z = %.2f + %.2fi\n", this.getX(), this.getY());
     }
 
     public void printPolar() {
-        System.out.printf("Z = %.2f * e ^ (%.2fi)\n", this.getR(), this.getTheta());
+        System.out.printf("z = %.2f * e ^ (%.2fi)\n", this.getR(), this.getTheta());
     }
 
     public abstract double getX();

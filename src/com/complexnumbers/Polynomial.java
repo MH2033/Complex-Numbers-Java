@@ -11,9 +11,14 @@ import java.util.Iterator;
 
 public class Polynomial {
 
+    public Polynomial() {
+
+    }
+
     private static class Term{
         private int exponent;
         private double coefficient;
+        private Complex root = new ComplexCartesian(0,0);
 
         Term(double coefficient, int exponent){
             this.exponent = exponent;
@@ -35,6 +40,14 @@ public class Polynomial {
         public void setCoefficient(double coefficient) {
             this.coefficient = coefficient;
         }
+
+        public Complex getRoot() {
+            return root;
+        }
+
+        public void setRoot(Complex root) {
+            this.root = root;
+        }
     }
 
     private ArrayList<Term> terms = new ArrayList<>();
@@ -46,17 +59,6 @@ public class Polynomial {
     public Polynomial(Term term) {
         this.terms.add(term);
     }
-
-    public Polynomial() {
-    }
-
-    //public Polynomial(Polynomial p) {
-    //    coefficients = new int[p.coefficients.length];
-    //    for (int i = 0; i < p.coefficients.length; i++) {
-    //        coefficients[i] = p.coefficients[i];
-    //    }
-    //    highestDegree = p.degree();
-    //}
 
     public int degree() {
         int d = terms.get(0).getExponent();
@@ -203,10 +205,14 @@ public class Polynomial {
             } else if (term.getCoefficient() < 0) {
                 s = s + " - " + (-term.getCoefficient());
             }
-            if (term.getExponent() == 1) {
+            if (term.getExponent() == 1 && term.getRoot().getR() == 0) {
                 s = s + "z";
-            } else if(term.getExponent() != 0){
+            } else if (term.getExponent() == 1 && term.getRoot().getR() != 0){
+                s = s + "(z - " + -term.getRoot().getX() + " + " +  -term.getRoot().getY() + "i)";
+            }else if(term.getExponent() != 0 && term.getRoot().getR() == 0){
                 s = s + "z^" + term.getExponent();
+            }else if(term.getExponent() != 0 && term.getRoot().getR() != 0){
+                s = s + "(z - " + -term.getRoot().getX() + " + " +  -term.getRoot().getY() + "i)^" + term.getExponent();
             }
         }
         return s;
@@ -230,7 +236,16 @@ public class Polynomial {
         this.terms = terms;
     }
 
-    private static class TermCompare implements Comparator<Term>{
+    public Polynomial taylor(Complex c, int terms){
+        return null;
+    }
+
+
+    public Polynomial laurent(Complex c, int terms){
+        return null;
+    }
+
+    private static class TermCompare implements Comparator<Term> {
 
         @Override
         public int compare(Term o1, Term o2) {

@@ -29,11 +29,12 @@ public class Main {
         Polynomial p = p1.add(p2).add(p3).add(p4);   //p = 4z^3 + 3z^2 + 2z + 1
         //System.out.println(p);
         Complex c4 = new ComplexCartesian(2, 2);
-        Polynomial p10 = new Polynomial(1, 4);
+        Polynomial p10 = new Polynomial(1, 8);
         //p10.calculate(new ComplexCartesian(1,1)).printCartesian();
         //System.out.println(p10.add(p));
         //System.out.println(p10.multiply(p));
         Polynomial p11 = p2.add(p3).add(p4);
-        System.out.println(p.divide(p11, 10));
+        p.calculate(c4).printCartesian();
+        System.out.println(p.divide(p10, 20));
     }
 }
